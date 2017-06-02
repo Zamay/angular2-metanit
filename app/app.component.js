@@ -1,21 +1,29 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-    }
-    return AppComponent;
-}());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        template: "<child-comp #counter></child-comp>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<button (click)=\"counter.increment()\">+</button>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<button (click)=\"counter.decrement()\">-</button>"
-    })
-], AppComponent);
-exports.AppComponent = AppComponent;
+/////////////////////////// ViewChild //////////////////////////////////////
+// import { Component, ViewChild } from '@angular/core';
+// import { ChildComponent} from './child.component';
+//
+// @Component({
+//     selector: 'my-app',
+//     template: `<child-comp></child-comp>
+//                 <button (click)="increment()">+</button>
+//                 <button (click)="decrement()">-</button>`
+// })
+// export class AppComponent {
+//     //декоратор @ViewChild
+//     @ViewChild(ChildComponent)
+//     private counterComponent: ChildComponent;
+//
+//     increment() { this.counterComponent.increment(); }
+//     decrement() { this.counterComponent.decrement(); }
+// }
+///////////////////////////////////////////////////////////////////
+// import { Component } from '@angular/core';
+//
+// @Component({
+//     selector: 'my-app',
+//     template: `<child-comp #counter></child-comp>
+//                 <button (click)="counter.increment()">+</button>
+//                 <button (click)="counter.decrement()">-</button>`
+// })
+// export class AppComponent { } 
 //# sourceMappingURL=app.component.js.map

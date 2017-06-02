@@ -11,21 +11,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ChildComponent = (function () {
     function ChildComponent() {
-        this.onChanged = new core_1.EventEmitter();
+        this.count = 1;
     }
-    ChildComponent.prototype.change = function (increased) {
-        this.onChanged.emit(increased);
+    ChildComponent.prototype.ngOnInit = function () {
+        this.log("ngOnInit");
+    };
+    ChildComponent.prototype.ngOnChanges = function () {
+        this.log("OnChanges");
+    };
+    ChildComponent.prototype.ngDoCheck = function () {
+        this.log("ngDoCheck");
+    };
+    ChildComponent.prototype.ngAfterViewInit = function () {
+        this.log("ngAfterViewInit");
+    };
+    ChildComponent.prototype.ngAfterViewChecked = function () {
+        this.log("ngAfterViewChecked");
+    };
+    ChildComponent.prototype.ngAfterContentInit = function () {
+        this.log("ngAfterContentInit");
+    };
+    ChildComponent.prototype.ngAfterContentChecked = function () {
+        this.log("ngAfterContentChecked");
+    };
+    ChildComponent.prototype.log = function (msg) {
+        console.log(this.count + ". " + msg);
+        this.count++;
     };
     return ChildComponent;
 }());
 __decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], ChildComponent.prototype, "onChanged", void 0);
+    core_1.Input(),
+    __metadata("design:type", String)
+], ChildComponent.prototype, "name", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-comp',
-        template: "<button (click)=\"change(true)\">+</button>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<button (click)=\"change(false)\">-</button>"
+        template: "<p>\u041F\u0440\u0438\u0432\u0435\u0442 {{name}}</p>"
     })
 ], ChildComponent);
 exports.ChildComponent = ChildComponent;

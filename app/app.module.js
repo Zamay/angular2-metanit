@@ -9,8 +9,8 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
+var child_component_1 = require("./child.component");
 var AppModule = (function () {
-    //AppModule, будет входной точкой в приложение
     function AppModule() {
     }
     return AppModule;
@@ -18,9 +18,22 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-        declarations: [app_component_1.AppComponent],
+        declarations: [app_component_1.AppComponent, child_component_1.ChildComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;
+//AppModule, будет входной точкой в приложение
+// NgModule представляет функцию-декоратора, которая принимает объект,
+// свойства которого описывают метаданные модуля. Наиболее важные свойства:
+//
+//  declarations: классы представлений (view classes), которые принадлежат модулю. Angular имеет три типа классов представлений: компоненты (components), директивы (directives), каналы (pipes)
+//
+// exports: набор классов представлений, которые должны использоваться в шаблонах компонентов из других модулей
+//
+// imports: другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
+//
+// providers: классы, создающие сервисы, используемые модулем
+//
+// bootstrap: корневой компонент, который вызывается по умолчанию при загрузке приложения 
 //# sourceMappingURL=app.module.js.map

@@ -8,15 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
-        this.name = "Tom";
-        this.age = 24;
+        this.clicks = 0;
     }
+    AppComponent.prototype.onChanged = function (increased) {
+        increased == true ? this.clicks++ : this.clicks--;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<child-comp [userName]=\"name\" [userAge]=\"age\"></child-comp>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<input type=\"text\" [(ngModel)]=\"name\" />\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<input type=\"text\" [(ngModel)]=\"age\" />"
+        template: "<h2>\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043A\u043B\u0438\u043A\u043E\u0432: {{clicks}}</h2>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<child-comp (onChanged)=\"onChanged($event)\"></child-comp>"
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

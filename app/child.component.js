@@ -11,37 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ChildComponent = (function () {
     function ChildComponent() {
+        this.onChanged = new core_1.EventEmitter();
     }
-    Object.defineProperty(ChildComponent.prototype, "userAge", {
-        get: function () { return this._userAge; },
-        set: function (age) {
-            if (age < 0)
-                this._userAge = 0;
-            else if (age > 100)
-                this._userAge = 100;
-            else
-                this._userAge = age;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    ChildComponent.prototype.change = function (increased) {
+        this.onChanged.emit(increased);
+    };
     return ChildComponent;
 }());
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], ChildComponent.prototype, "userName", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number),
-    __metadata("design:paramtypes", [Number])
-], ChildComponent.prototype, "userAge", null);
+    core_1.Output(),
+    __metadata("design:type", Object)
+], ChildComponent.prototype, "onChanged", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-comp',
-        template: "<p>\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F: {{userName}}</p>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<p>\u0412\u043E\u0437\u0440\u0430\u0441\u0442 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F: {{userAge}}</p>"
+        template: "<button (click)=\"change(true)\">+</button>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<button (click)=\"change(false)\">-</button>"
     })
 ], ChildComponent);
 exports.ChildComponent = ChildComponent;
-//определение входных свойств с помощью декоратора @Input() 
 //# sourceMappingURL=child.component.js.map

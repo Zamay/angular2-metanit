@@ -9,3 +9,4 @@ import { AppComponent }   from './app.component';
 })
 //AppModule, будет входной точкой в приложение
 export class AppModule { }
+

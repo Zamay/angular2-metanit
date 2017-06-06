@@ -2,48 +2,20 @@ import { Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
-    template: `<p *ngIf="condition;else unset">
-                  Привет мир
-                </p>
-                <ng-template #unset>  
-                  <p>Пока мир</p>  
-                </ng-template>  
-                <button (click)="toggle()">Toggle</button>`
+    template: `    <div>
+                    <p *ngFor="let item of items; let i = index">{{i+1}}.{{item}}</p>
+                    <p *ngFor="let item of items">{{item}}</p>
+                   </div>`
 })
 export class AppComponent {
 
-    condition: boolean=true;
-
-    toggle(){
-        this.condition=!this.condition;
-    }
+    items =["Apple iPhone 7", "Huawei Mate 9", "Samsung Galaxy S7", "Motorola Moto Z"];
 }
 
-//
-// template: ` <div *ngIf="condition; then thenBlock else elseBlock"></div>  
-//             <ng-template #thenBlock>Then template</ng-template> 
-//             <ng-template #elseBlock>Else template</ng-template>   
-//             <button (click)="toggle()">Toggle</button>`
-
-/////////////////////////////////////////////////////////////////////////////////////
-
-// import { Component} from '@angular/core';
-//
-// @Component({
-//     selector: 'my-app',
-//     template: `<p *ngIf="condition">
-//                   Привет мир
-//                 </p>
-//                 <p *ngIf="!condition">
-//                   Пока мир
-//                 </p>
-//                 <button (click)="toggle()">Toggle</button>`
-// })
-// export class AppComponent {
-//
-//     condition: boolean=true;
-//
-//     toggle(){
-//         this.condition=!this.condition;
-//     }
-// }
+// <p *ngFor="let item of items">{{item}}</p>
+// или так
+// <ul>
+//     <template ngFor let-item [ngForOf]="items">
+//     <li>{{item}}</li>
+// </template>
+// </ul>

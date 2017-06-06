@@ -8,44 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
-        this.condition = true;
+        this.items = ["Apple iPhone 7", "Huawei Mate 9", "Samsung Galaxy S7", "Motorola Moto Z"];
     }
-    AppComponent.prototype.toggle = function () {
-        this.condition = !this.condition;
-    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<p *ngIf=\"condition;else unset\">\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u041F\u0440\u0438\u0432\u0435\u0442 \u043C\u0438\u0440\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</p>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<ng-template #unset>\u00A0 \n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<p>\u041F\u043E\u043A\u0430 \u043C\u0438\u0440</p>\u00A0 \n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</ng-template>\u00A0\u00A0\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<button (click)=\"toggle()\">Toggle</button>"
+        template: "    <div>\n                    <p *ngFor=\"let item of items; let i = index\">{{i+1}}.{{item}}</p>\n                    <p *ngFor=\"let item of items\">{{item}}</p>\n                   </div>"
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
-//
-// template: ` <div *ngIf="condition; then thenBlock else elseBlock"></div>  
-//             <ng-template #thenBlock>Then template</ng-template> 
-//             <ng-template #elseBlock>Else template</ng-template>   
-//             <button (click)="toggle()">Toggle</button>`
-/////////////////////////////////////////////////////////////////////////////////////
-// import { Component} from '@angular/core';
-//
-// @Component({
-//     selector: 'my-app',
-//     template: `<p *ngIf="condition">
-//                   Привет мир
-//                 </p>
-//                 <p *ngIf="!condition">
-//                   Пока мир
-//                 </p>
-//                 <button (click)="toggle()">Toggle</button>`
-// })
-// export class AppComponent {
-//
-//     condition: boolean=true;
-//
-//     toggle(){
-//         this.condition=!this.condition;
-//     }
-// } 
+// <p *ngFor="let item of items">{{item}}</p>
+// или так
+// <ul>
+//     <template ngFor let-item [ngForOf]="items">
+//     <li>{{item}}</li>
+// </template>
+// </ul> 
 //# sourceMappingURL=app.component.js.map

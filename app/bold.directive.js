@@ -10,13 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var BoldDirective = (function () {
-    function BoldDirective(elementRef, renderer) {
-        this.elementRef = elementRef;
+    function BoldDirective(element, renderer) {
+        this.element = element;
         this.renderer = renderer;
-        this.renderer.setElementStyle(this.elementRef.nativeElement, "font-weight", "bold");
+        this.renderer.setElementStyle(this.element.nativeElement, "cursor", "pointer");
     }
+    BoldDirective.prototype.onMouseEnter = function () {
+        this.setFontWeight("bold");
+    };
+    BoldDirective.prototype.onMouseLeave = function () {
+        this.setFontWeight("normal");
+    };
+    BoldDirective.prototype.setFontWeight = function (val) {
+        this.renderer.setElementStyle(this.element.nativeElement, "font-weight", val);
+    };
     return BoldDirective;
 }());
+__decorate([
+    core_1.HostListener("mouseenter"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BoldDirective.prototype, "onMouseEnter", null);
+__decorate([
+    core_1.HostListener("mouseleave"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BoldDirective.prototype, "onMouseLeave", null);
 BoldDirective = __decorate([
     core_1.Directive({
         selector: '[bold]'
@@ -24,22 +45,4 @@ BoldDirective = __decorate([
     __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer])
 ], BoldDirective);
 exports.BoldDirective = BoldDirective;
-// Renderer представляет сервис, который также при вызове директивы автоматически передается в ее конструктор,
-// и мы можем использовать данный сервис для стилизации элемента.
-// import {Directive, ElementRef} from '@angular/core';
-//
-// @Directive({
-//     selector: '[bold]'
-// })
-// export class BoldDirective{
-//
-//     constructor(private elementRef: ElementRef){
-//
-//         this.elementRef.nativeElement.style.fontWeight = "bold";
-//     }
-// }
-//
-//Директива - это обычный класс на TS, к которому применяется декоратор Directive,
-//
-// класс "ElementRef". Он представляет ссылку на элемент, к которому будет применяться директива. 
 //# sourceMappingURL=bold.directive.js.map

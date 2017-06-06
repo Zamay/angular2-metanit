@@ -10,22 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var BoldDirective = (function () {
-    function BoldDirective(element, renderer) {
-        this.element = element;
-        this.renderer = renderer;
-        this.renderer.setElementStyle(this.element.nativeElement, "cursor", "pointer");
+    function BoldDirective() {
+        this.fontWeight = "normal";
     }
+    Object.defineProperty(BoldDirective.prototype, "getFontWeight", {
+        get: function () {
+            return this.fontWeight;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BoldDirective.prototype, "getCursor", {
+        get: function () {
+            return "pointer";
+        },
+        enumerable: true,
+        configurable: true
+    });
     BoldDirective.prototype.onMouseEnter = function () {
-        this.setFontWeight("bold");
+        this.fontWeight = "bold";
     };
     BoldDirective.prototype.onMouseLeave = function () {
-        this.setFontWeight("normal");
-    };
-    BoldDirective.prototype.setFontWeight = function (val) {
-        this.renderer.setElementStyle(this.element.nativeElement, "font-weight", val);
+        this.fontWeight = "normal";
     };
     return BoldDirective;
 }());
+__decorate([
+    core_1.HostBinding("style.fontWeight"),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], BoldDirective.prototype, "getFontWeight", null);
+__decorate([
+    core_1.HostBinding("style.cursor"),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], BoldDirective.prototype, "getCursor", null);
 __decorate([
     core_1.HostListener("mouseenter"),
     __metadata("design:type", Function),
@@ -42,7 +61,7 @@ BoldDirective = __decorate([
     core_1.Directive({
         selector: '[bold]'
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer])
+    __metadata("design:paramtypes", [])
 ], BoldDirective);
 exports.BoldDirective = BoldDirective;
 //# sourceMappingURL=bold.directive.js.map

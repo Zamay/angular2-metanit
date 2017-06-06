@@ -1,24 +1,27 @@
-import {Directive, ElementRef, Renderer, HostListener} from '@angular/core';
+import {Directive, HostListener, HostBinding} from '@angular/core';
 
 @Directive({
     selector: '[bold]'
 })
 export class BoldDirective{
 
-    constructor(private element: ElementRef, private renderer: Renderer){
+    private fontWeight = "normal";
+    constructor(){}
 
-        this.renderer.setElementStyle(this.element.nativeElement, "cursor", "pointer");
+    @HostBinding("style.fontWeight") get getFontWeight(){
+
+        return this.fontWeight;
+    }
+
+    @HostBinding("style.cursor") get getCursor(){
+        return "pointer";
     }
 
     @HostListener("mouseenter") onMouseEnter() {
-        this.setFontWeight("bold");
+        this.fontWeight ="bold";
     }
 
     @HostListener("mouseleave") onMouseLeave() {
-        this.setFontWeight("normal");
-    }
-
-    private setFontWeight(val: any) {
-        this.renderer.setElementStyle(this.element.nativeElement, "font-weight", val);
+        this.fontWeight = "normal";
     }
 }

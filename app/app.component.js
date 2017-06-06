@@ -8,17 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
-        this.condition = true;
+        this.count = 2;
     }
-    AppComponent.prototype.toggle = function () {
-        this.condition = !this.condition;
-    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<p *while=\"condition\">\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u041F\u0435\u0440\u0432\u044B\u0439 \u043F\u0430\u0440\u0430\u0433\u0440\u0430\u0444\n\u00A0\u00A0\u00A0\u00A0</p>\n\u00A0\u00A0\u00A0\u00A0<p *while=\"!condition\">\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u0412\u0442\u043E\u0440\u043E\u0439 \u043F\u0430\u0440\u0430\u0433\u0440\u0430\u0444\n\u00A0\u00A0\u00A0\u00A0</p>\n\u00A0\u00A0\u00A0\u00A0<button (click)=\"toggle()\">Toggle</button>"
+        template: "<div [ngSwitch]=\"count\">\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<template [ngSwitchCase]=\"1\">{{count * 10}}</template>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<template [ngSwitchCase]=\"2\">{{count * 100}}</template>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<template ngSwitchDefault>{{count * 1000}}</template>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</div>"
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

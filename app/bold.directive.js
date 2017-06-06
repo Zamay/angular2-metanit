@@ -11,8 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var BoldDirective = (function () {
     function BoldDirective() {
+        this.selectedSize = "18px";
+        this.defaultSize = "16px";
         this.fontWeight = "normal";
     }
+    BoldDirective.prototype.ngOnInit = function () {
+        this.fontSize = this.defaultSize;
+    };
+    Object.defineProperty(BoldDirective.prototype, "getFontSize", {
+        get: function () {
+            return this.fontSize;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(BoldDirective.prototype, "getFontWeight", {
         get: function () {
             return this.fontWeight;
@@ -29,12 +41,27 @@ var BoldDirective = (function () {
     });
     BoldDirective.prototype.onMouseEnter = function () {
         this.fontWeight = "bold";
+        this.fontSize = this.selectedSize;
     };
     BoldDirective.prototype.onMouseLeave = function () {
         this.fontWeight = "normal";
+        this.fontSize = this.defaultSize;
     };
     return BoldDirective;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BoldDirective.prototype, "selectedSize", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BoldDirective.prototype, "defaultSize", void 0);
+__decorate([
+    core_1.HostBinding("style.fontSize"),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], BoldDirective.prototype, "getFontSize", null);
 __decorate([
     core_1.HostBinding("style.fontWeight"),
     __metadata("design:type", Object),

@@ -1,11 +1,5 @@
 import { Component} from '@angular/core';
-
-
-export class User{
-    name: string;
-    email: string;
-    phone: string;
-}
+import { NgForm} from '@angular/forms';
 
 @Component({
     selector: 'my-app',
@@ -13,31 +7,32 @@ export class User{
         input.ng-touched.ng-invalid {border:solid red 2px;}
         input.ng-touched.ng-valid {border:solid green 2px;}
     `],
-    template: `<div> 
+    template: `<form #myForm="ngForm" novalidate>
                     <div class="form-group">
                         <label>Имя</label>
-                        <input class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" required />
+                        <input class="form-control" name="name" [(ngModel)]="name" required />
                     </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" type="email" name="email" [(ngModel)]="user.email" #email="ngModel"
-                            required email />
-                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" name="email" ngModel 
+                            required pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" />
+                    </div>
                     <div class="form-group">
                         <label>Телефон</label>
-                        <input class="form-control" name="phone" [(ngModel)]="user.phone" #phone="ngModel" 
+                        <input class="form-control" name="phone" ngModel 
                             required pattern="[0-9]{10}" />
                     </div>
                     <div class="form-group">
-                        <button [disabled]="name.invalid || email.invalid || phone.invalid"
-                                class="btn btn-default" (click)="addUser()">Добавить</button>
+                        <button [disabled]="myForm.invalid"
+                                class="btn btn-default" (click)="submit(myForm)">Добавить</button>
                     </div>
-              </div>`
+                </form>
+                <div>Имя: {{myForm.value.name}}</div>
+                <div>Email: {{myForm.value.email}}</div>`
 })
 export class AppComponent {
 
-    user: User = new User();
-    addUser(){
-        console.log(this.user);
+    submit(form: NgForm){
+        console.log(form);
     }
 }

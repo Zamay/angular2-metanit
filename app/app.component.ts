@@ -1,65 +1,31 @@
-import { Component} from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { Response} from '@angular/http';
+import { HttpService} from './http.service';
+import {User} from './user';
 
 @Component({
     selector: 'my-app',
-    styles: [`
-        input.ng-touched.ng-invalid {border:solid red 2px;}
-        input.ng-touched.ng-valid {border:solid green 2px;}
-    `],
-    template: `<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-                    <div class="form-group">
-                        <label>Имя</label>
-                        <input class="form-control" name="name" formControlName="userName" />
-                         
-                        <div class="alert alert-danger"
-                            *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
-                            Не указано имя
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" name="email" formControlName="userEmail" />
-                         
-                        <div class="alert alert-danger"
-                            *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
-                            Некорректный email
-                        </div>
-                    </div>
-                    <div formArrayName="phones">
-                        <div class="form-group" *ngFor="let phone of myForm.controls['phones'].controls; let i = index">
-                            <label>Телефон</label>
-                            <input class="form-control" formControlName="{{i}}" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-default" (click)="addPhone()">
-                            Добавить телефон
-                        </button>
-                        <button class="btn btn-default" [disabled]="myForm.invalid">
-                            Отправить
-                        </button>
-                    </div>
-                </form>`
+    template: `<ul>
+                    <li *ngFor="let user of users">
+                    <p>Имя пользователя: {{user?.name}}</p>
+                    <p>Возраст пользователя: {{user?.age}}</p>
+                    </li>
+                </ul>`,
+    providers: [HttpService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-    myForm : FormGroup;
-    constructor(private formBuilder: FormBuilder){
+    users: User[]=[];
 
-        this.myForm = formBuilder.group({
+    constructor(private httpService: HttpService){}
+    ngOnInit(){
 
-            "userName": ["Tom", [Validators.required]],
-            "userEmail": ["", [ Validators.required, Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]],
-            "phones": formBuilder.array([
-                ["+7", Validators.required]
-            ])
-        });
-    }
-    addPhone(){
-        (<FormArray>this.myForm.controls["phones"]).push(new FormControl("+7", Validators.required));
-    }
-    submit(){
-        console.log(this.myForm);
+        this.httpService.getData()
+            .subscribe((data: Response) => this.users=data.json());
     }
 }
+
+// определение файла user.json представляло объект User,
+// а файл users.json определял массив объектов User.
+// Причем, ключи в json-файле соответствовали названиям свойств класса User.
+// То есть было прямое соответствие.

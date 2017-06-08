@@ -1,14 +1,12 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule}   from '@angular/forms';
+import {FormsModule}   from '@angular/forms';
 import { AppComponent }   from './app.component';
-// import { ChildComponent }   from './child.component';
-import { BoldDirective} from './bold.directive';
-import {WhileDirective} from "./while.directive";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, ReactiveFormsModule  ],
-    declarations: [ AppComponent, BoldDirective, WhileDirective],
+    imports:      [ BrowserModule, FormsModule, HttpModule ],
+    declarations: [ AppComponent],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

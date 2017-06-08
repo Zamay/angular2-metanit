@@ -9,9 +9,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
-// import { ChildComponent }   from './child.component';
-var bold_directive_1 = require("./bold.directive");
-var while_directive_1 = require("./while.directive");
+var http_1 = require("@angular/http");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -19,8 +17,8 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
-        declarations: [app_component_1.AppComponent, bold_directive_1.BoldDirective, while_directive_1.WhileDirective],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule],
+        declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

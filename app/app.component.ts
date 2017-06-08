@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 
 @Component({
     selector: 'my-app',
@@ -7,32 +7,61 @@ import { NgForm} from '@angular/forms';
         input.ng-touched.ng-invalid {border:solid red 2px;}
         input.ng-touched.ng-valid {border:solid green 2px;}
     `],
-    template: `<form #myForm="ngForm" novalidate>
+    template: `<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input class="form-control" name="name" [(ngModel)]="name" required />
+                        <input class="form-control" name="name" formControlName="userName" />
+                         
+                        <div class="alert alert-danger"
+                            *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
+                            Не указано имя
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" name="email" ngModel 
-                            required pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" />
+                        <input class="form-control" name="email" formControlName="userEmail" />
+                         
+                        <div class="alert alert-danger"
+                            *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
+                            Некорректный email
+                        </div>
+                    </div>
+                    <div formArrayName="phones">
+                        <div class="form-group" *ngFor="let phone of myForm.controls['phones'].controls; let i = index">
+                            <label>Телефон</label>
+                            <input class="form-control" formControlName="{{i}}" />
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Телефон</label>
-                        <input class="form-control" name="phone" ngModel 
-                            required pattern="[0-9]{10}" />
+                        <button class="btn btn-default" (click)="addPhone()">
+                            Добавить телефон
+                        </button>
+                        <button class="btn btn-default" [disabled]="myForm.invalid">
+                            Отправить
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <button [disabled]="myForm.invalid"
-                                class="btn btn-default" (click)="submit(myForm)">Добавить</button>
-                    </div>
-                </form>
-                <div>Имя: {{myForm.value.name}}</div>
-                <div>Email: {{myForm.value.email}}</div>`
+                </form>`
 })
 export class AppComponent {
 
-    submit(form: NgForm){
-        console.log(form);
+    myForm : FormGroup;
+    constructor(){
+        this.myForm = new FormGroup({
+
+            "userName": new FormControl("Tom", [Validators.required]),
+            "userEmail": new FormControl("", [
+                Validators.required,
+                Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")
+            ]),
+            "phones": new FormArray([
+                new FormControl("+7", Validators.required)
+            ])
+        });
+    }
+    addPhone(){
+        (<FormArray>this.myForm.controls["phones"]).push(new FormControl("+7", Validators.required));
+    }
+    submit(){
+        console.log(this.myForm);
     }
 }

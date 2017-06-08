@@ -1,17 +1,19 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import {FormsModule, ReactiveFormsModule}   from '@angular/forms';
 import { AppComponent }   from './app.component';
 // import { ChildComponent }   from './child.component';
 import { BoldDirective} from './bold.directive';
 import {WhileDirective} from "./while.directive";
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule ],
+    imports:      [ BrowserModule, FormsModule, ReactiveFormsModule  ],
     declarations: [ AppComponent, BoldDirective, WhileDirective],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
+
+// ReactiveFormsModule
 
 //AppModule, будет входной точкой в приложение
 // NgModule представляет функцию-декоратора, которая принимает объект,

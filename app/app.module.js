@@ -19,12 +19,13 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
         declarations: [app_component_1.AppComponent, bold_directive_1.BoldDirective, while_directive_1.WhileDirective],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;
+// ReactiveFormsModule
 //AppModule, будет входной точкой в приложение
 // NgModule представляет функцию-декоратора, которая принимает объект,
 // свойства которого описывают метаданные модуля. Наиболее важные свойства:

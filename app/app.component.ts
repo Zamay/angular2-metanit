@@ -21,11 +21,15 @@ export class AppComponent implements OnInit {
     ngOnInit(){
 
         this.httpService.getData()
-            .subscribe((data: Response) => this.users=data.json());
+            .subscribe((resp: Response) => {
+                // this.users = resp.json().data;
+                /////////////////////////////////////////////////////
+                let usersList = resp.json().data;
+                for(let index in usersList){
+                    console.log(usersList[index]);
+                    let user = usersList[index];
+                    this.users.push({name: user.userName, age: user.userAge});
+                }
+            });
     }
 }
-
-// определение файла user.json представляло объект User,
-// а файл users.json определял массив объектов User.
-// Причем, ключи в json-файле соответствовали названиям свойств класса User.
-// То есть было прямое соответствие.

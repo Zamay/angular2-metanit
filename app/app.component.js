@@ -18,7 +18,16 @@ var AppComponent = (function () {
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.httpService.getData()
-            .subscribe(function (data) { return _this.users = data.json(); });
+            .subscribe(function (resp) {
+            // this.users = resp.json().data;
+            /////////////////////////////////////////////////////
+            var usersList = resp.json().data;
+            for (var index in usersList) {
+                console.log(usersList[index]);
+                var user = usersList[index];
+                _this.users.push({ name: user.userName, age: user.userAge });
+            }
+        });
     };
     return AppComponent;
 }());
@@ -31,8 +40,4 @@ AppComponent = __decorate([
     __metadata("design:paramtypes", [http_service_1.HttpService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
-// определение файла user.json представляло объект User,
-// а файл users.json определял массив объектов User.
-// Причем, ключи в json-файле соответствовали названиям свойств класса User.
-// То есть было прямое соответствие. 
 //# sourceMappingURL=app.component.js.map

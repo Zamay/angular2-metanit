@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
 
 @Component({
     selector: 'my-app',
@@ -45,16 +45,14 @@ import { FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 export class AppComponent {
 
     myForm : FormGroup;
-    constructor(){
-        this.myForm = new FormGroup({
+    constructor(private formBuilder: FormBuilder){
 
-            "userName": new FormControl("Tom", [Validators.required]),
-            "userEmail": new FormControl("", [
-                Validators.required,
-                Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")
-            ]),
-            "phones": new FormArray([
-                new FormControl("+7", Validators.required)
+        this.myForm = formBuilder.group({
+
+            "userName": ["Tom", [Validators.required]],
+            "userEmail": ["", [ Validators.required, Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]],
+            "phones": formBuilder.array([
+                ["+7", Validators.required]
             ])
         });
     }

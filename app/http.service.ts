@@ -4,6 +4,8 @@ import {Response} from '@angular/http';
 import {User} from './user';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class HttpService{
@@ -11,7 +13,7 @@ export class HttpService{
     constructor(private http: Http){ }
 
     getUsers() : Observable<User[]>{
-        return this.http.get('user.json')
+        return this.http.get('usera.json')
             .map((resp:Response)=>{
 
                 let usersList = resp.json().data;
@@ -22,6 +24,7 @@ export class HttpService{
                     users.push({name: user.userName, age: user.userAge});
                 }
                 return users;
-            });
+            })
+            .catch((error: any)=> { return Observable.throw(error);});
     }
 }

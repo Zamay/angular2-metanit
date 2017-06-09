@@ -10,13 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/observable/throw");
 var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
     }
     HttpService.prototype.getUsers = function () {
-        return this.http.get('user.json')
+        return this.http.get('usera.json')
             .map(function (resp) {
             var usersList = resp.json().data;
             var users = [];
@@ -26,7 +29,8 @@ var HttpService = (function () {
                 users.push({ name: user.userName, age: user.userAge });
             }
             return users;
-        });
+        })
+            .catch(function (error) { return Observable_1.Observable.throw(error); });
     };
     return HttpService;
 }());

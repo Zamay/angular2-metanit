@@ -17,17 +17,42 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.httpService.getUsers().subscribe(function (data) { return _this.users = data; });
+        this.httpService.getUsers()
+            .subscribe(function (data) { return _this.users = data; }, function (error) { _this.error = error; console.log(error); });
     };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "<ul>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<li *ngFor=\"let user of users\">\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<p>\u0418\u043C\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F: {{user.name}}</p>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<p>\u0412\u043E\u0437\u0440\u0430\u0441\u0442 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F: {{user.age}}</p>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</li>\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</ul>",
+        template: "<div>{{error}}</div>",
         providers: [http_service_1.HttpService]
     }),
     __metadata("design:paramtypes", [http_service_1.HttpService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
+// import { Component, OnInit} from '@angular/core';
+// import { HttpService} from './http.service';
+// import {User} from './user';
+//
+// @Component({
+//     selector: 'my-app',
+//     template: `<ul>
+//                     <li *ngFor="let user of users">
+//                     <p>Имя пользователя: {{user.name}}</p>
+//                     <p>Возраст пользователя: {{user.age}}</p>
+//                     </li>
+//                 </ul>`,
+//     providers: [HttpService]
+// })
+// export class AppComponent implements OnInit {
+//
+//     users: User[]=[];
+//
+//     constructor(private httpService: HttpService){}
+//     ngOnInit(){
+//
+//         this.httpService.getUsers().subscribe((data)=>this.users=data);
+//     }
+// } 
 //# sourceMappingURL=app.component.js.map

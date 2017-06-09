@@ -10,12 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
 var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
     }
-    HttpService.prototype.getData = function () {
-        return this.http.get('user.json');
+    HttpService.prototype.getUsers = function () {
+        return this.http.get('user.json')
+            .map(function (resp) {
+            var usersList = resp.json().data;
+            var users = [];
+            for (var index in usersList) {
+                console.log(usersList[index]);
+                var user = usersList[index];
+                users.push({ name: user.userName, age: user.userAge });
+            }
+            return users;
+        });
     };
     return HttpService;
 }());
